@@ -1,0 +1,30 @@
+
+.background-app {
+  background-color: #1c181b;
+  color: #F5F3F4;
+  height: 100%;
+}
+
+.movie-card-random {
+  width: 200px;
+  height: 300px;
+  background-color: #161A1D;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.movie-card {
+  width: 200px;
+  height: 300px;
+  background-color: #161A1D;
+  margin: 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px;
+  cursor: pointer;
+}

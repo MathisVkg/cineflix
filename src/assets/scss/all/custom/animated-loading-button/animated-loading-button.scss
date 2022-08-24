@@ -1,0 +1,133 @@
+$base-duration: 333ms;
+
+$color-2: #394f97;
+$color-3: #2ecc71;
+
+// Breakpoints
+$sm: new-breakpoint(min-width 320px);
+$med: new-breakpoint(min-width 768px);
+$lg: new-breakpoint(min-width 1024px);
+
+
+.hide { display: none;}
+
+.animated-loading-button {
+	border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+	border-radius: 2px;
+	
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 12.5rem;
+	margin: 0;
+	height:36px !important;
+	background-color: $color-2;
+	box-shadow: 0 12px 24px 0 rgba(0,0,0,0.2);
+	color: white;
+	font-weight: 300;
+	overflow: hidden; 
+	
+	&:before {
+		position: absolute;
+		content: '';
+		bottom: 0;
+		left: 0;
+		width: 0%;
+		height: 100%;
+		background-color: lighten($color-3,10%);
+	}
+	
+	span {
+		position: absolute;
+		line-height: 0;
+		
+		i {
+			transform-origin: center center;
+		}
+
+		&:nth-of-type(1) {
+			top: 50%;
+			transform: translateY(-50%);
+		}
+		
+		&:nth-of-type(2) {
+			top: 120%;
+			transform: translateY(0%);
+			font-size: 24px;
+		}
+		
+		&:nth-of-type(3) {
+			display: none;
+		}
+	}
+}
+
+.animated-loading-button-active {
+	background-color: $color-3;
+	
+	&:before {
+		width: 100%;
+		transition: width 3s linear;
+	}
+
+	span {
+		
+		&:nth-of-type(1) {
+			top: -100%;
+			transform: translateY(-50%); 
+		}
+
+		&:nth-of-type(2) {
+			top: 50%;
+			transform: translateY(-50%);
+
+			i {
+				animation: loading $base-duration linear infinite;
+			}
+		}
+		
+		&:nth-of-type(3) {
+			display: none;
+		}
+	}
+}
+
+.animated-loading-button-finished {
+	background-color: lighten($color-3,10%);
+	
+	.animated-loading-button-submit {
+		display: none; 
+	}
+	
+	.animated-loading-button-loading {
+		display: none;
+	}
+	
+	.animated-loading-button-check {
+		display: block !important;
+		font-size: 24px;
+		animation: scale 0.5s linear;
+		
+		i {
+			transform-origin: center center;
+		}
+	}
+	
+}
+
+@keyframes loading {
+	100% { transform: rotate(360deg); }
+}
+
+@keyframes scale {
+	0%   { transform: scale(10); }
+	50%  { transform: scale(0.2); }
+	70%  { transform: scale(1.2); }
+	90%  { transform: scale(0.7); }
+	100% { transform: scale(1); }
+}

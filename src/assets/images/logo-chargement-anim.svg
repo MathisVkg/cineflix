@@ -1,0 +1,43 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 936 596" style="" xml:space="preserve">
+    
+    <defs>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#3c86c7" />
+        <stop offset="115%" stop-color="#350656" />
+        </linearGradient>
+    </defs>
+
+    <style type="text/css">
+        .st0{fill:none;stroke-width:66;stroke-linecap:round;stroke-miterlimit:10;}
+    </style>
+
+    <path class="st0 line" stroke="url(#gradient)" d="M33.7,557.7L278,99.5c10-18.8,24.3-35.1,41.9-47.1c25.3-17.1,63.3-29.6,109.8-4.8c26.8,14.3,43.4,45,57.3,72
+        c0,0,127.8,241,145.1,271.5c31.6,55.8,25.4,168.3-86.1,168.3c-103.9,0-111.7-107.8-89-157.8c11.6-25.6,110.7-214.4,147.9-282.8
+        c27.5-50.6,79.9-83.1,137.5-84.1c1.1,0,2.2,0,3.3,0C837,33.7,898.3,123,898.3,179.7c0,62-26,165.3-158,167.3"></path>
+
+    <style data-made-with="vivus-instant">
+        .line {
+            stroke-dasharray: 2534 2536;
+            stroke-dashoffset: 2535;
+            animation: draw 4000ms linear 0ms infinite;
+        }
+
+        @keyframes draw {
+            5% {
+                stroke-dashoffset: 2535;
+            }
+            40% {
+                stroke-dashoffset: 0;
+            }
+            60% {
+                stroke-dashoffset: 0;
+            }
+            95% {
+                stroke-dashoffset: -2535;
+            }
+            100% {
+                stroke-dashoffset: -2535;
+            }
+        }
+    </style>
+</svg>

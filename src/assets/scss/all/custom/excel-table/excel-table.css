@@ -1,0 +1,46 @@
+.excel-table{
+	background: aliceblue;
+	text-align: center;
+}
+
+.excel-table tbody tr:first-child{
+	background:#366289;
+	color: whitesmoke;
+	padding:5px;
+	border: 1px solid lightgray;
+}
+
+.excel-table tbody tr:first-child th{
+	padding: 10px;
+	font-weight: normal;
+	font-size:1.05em;
+}
+
+.excel-table tbody td:last-child{
+	display: none;
+}
+
+.excel-table tbody tr:nth-child(even){
+	background: #EAF3FA;
+}
+
+.excel-table td{
+	padding: 8px 16px;
+	border-right:1px solid lightgray;
+}
+
+.excel-table tbody td:first-child{
+	border-left:1px solid lightgray;
+}
+
+.excel-table tbody tr:last-child{
+	border-bottom:1px solid lightgray;
+}
+
+.excel-table tr:nth-child(even) .heading{
+	background: #A1BFDA;
+}
+
+.excel-table tr:nth-child(odd) .heading{
+	background: #B3CEE6;
+}

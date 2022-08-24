@@ -1,0 +1,40 @@
+.popover-selection-utilisateurs .popover{
+    min-width: 30vw !important;
+    /*max-width: 40vw !important;*/
+}
+
+.popover-selection-utilisateurs label{
+    font-size: 16px;
+}
+
+.popover-selection-utilisateurs .popover-header{
+    font-size: 17px;
+}
+
+.height{
+    /*max-height:30vh;*/
+}
+.fermer{
+    position: absolute;
+    padding:1px 16px;
+    right:0;
+}
+.loupe{
+    opacity: 0.75;
+    font-size: 1.5em;
+    margin-bottom: -1rem; /* Corrige le margin bottom 1rem du form groupe dans lequel on est */
+}
+.loupe:hover{
+    opacity: 1;
+}
+
+/* ********** */
+.searchPointer{
+   font-size: 1.5rem;
+   opacity: 0.75;
+}
+
+.searchPointer:hover {
+   cursor: pointer;
+   opacity: 1;
+}
