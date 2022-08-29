@@ -10,7 +10,7 @@ function getLastestMovie() {
   console.log(url);
   const requestOptions = {
     method: "GET",
-    headers: authHeader(true)
+    headers: { "Content-Type": "application/json" }
   };
 
   return fetch(url, requestOptions)
