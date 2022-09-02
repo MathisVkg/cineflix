@@ -8,6 +8,7 @@ export default function fulllayout() {
       <Suspense fallback={null}>
         <Switch>
           <Route path="/accueil" component={components.Accueil} />
+          <Route path="/movie-detail/:movieId" component={components.Detail} />
         </Switch>
       </Suspense>
     </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { movieDbService } from "../../jwt/_services/movieDb.service";
 import { Col, Nav, NavItem, NavLink, Row } from "reactstrap";
+import { Link } from "react-router-dom";
 
 function Accueil() {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -30,7 +31,11 @@ function Accueil() {
 
   return (
     <div className="background-app d-flex flex-column justify-content-center">
-      <div className="random-card" style={{ backgroundImage: `url(${IMGPATH}${randomMovie?.backdrop_path})` }}>
+      <Link
+        to={`/movie-detail/${randomMovie?.id}`}
+        className="random-card"
+        style={{ backgroundImage: `url(${IMGPATH}${randomMovie?.backdrop_path})` }}
+      >
         <Row className="justify-content-between align-items-center w-100">
           <Col sm="3" className="random-card-vote">
             <div className="mb-4">
@@ -50,34 +55,38 @@ function Accueil() {
             </div>
           </Col>
         </Row>
-      </div>
-      <div className="d-flex justify-content-center mt-5">
-        <Nav>
-          <NavItem className="movie-nav">
-            <p>Movies</p>
-          </NavItem>
-          <NavItem className="movie-nav">
-            <p>Series</p>
-          </NavItem>
-          <NavItem className="movie-nav">
-            <p>Animes</p>
-          </NavItem>
-        </Nav>
-      </div>
+      </Link>
+      {/* <div className="d-flex justify-content-center mt-5">*/}
+      {/*  <Nav>*/}
+      {/*    <NavItem className="movie-nav">*/}
+      {/*      <p>Discover</p>*/}
+      {/*    </NavItem>*/}
+      {/*    <NavItem className="movie-nav">*/}
+      {/*      <p>Account</p>*/}
+      {/*    </NavItem>*/}
+      {/*  </Nav>*/}
+      {/* </div>*/}
       <div className="movie-container">
-        {popularMovies?.map(({ poster_path, vote_average, title }, index) => (
+        <Col sm="4" className="movie-text">
+          <p className="title">Popular Movies</p>
+          <hr />
+          <p className="extra">Exciting, emotional and unexpected.</p>
+        </Col>
+        {popularMovies?.map(({ poster_path, vote_average, title, id }, index) => (
           <Col sm="auto" className="movie-card">
-            <div className="movie-card-back" style={{ backgroundImage: `url(${IMGPATH}${poster_path})` }} />
-            <div>
-              <p className="title">{title}</p>
-              <p
-                className={`note ${
-                  vote_average > 7 ? "movie-vote-green" : vote_average > 3 ? "movie-vote-orange" : "movie-vote-red"
-                }`}
-              >
-                {vote_average}
-              </p>
-            </div>
+            <Link to={`/movie-detail/${id}`}>
+              <div className="movie-card-back" style={{ backgroundImage: `url(${IMGPATH}${poster_path})` }} />
+              <div>
+                <p className="title">{title}</p>
+                <p
+                  className={`note ${
+                    vote_average > 7 ? "movie-vote-green" : vote_average > 3 ? "movie-vote-orange" : "movie-vote-red"
+                  }`}
+                >
+                  {vote_average}
+                </p>
+              </div>
+            </Link>
           </Col>
         ))}
       </div>

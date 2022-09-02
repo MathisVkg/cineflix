@@ -2,13 +2,11 @@ body {
   font-family: 'Barlow Condensed', sans-serif !important;
   height: 100vh;
 }
-
 .background-app {
   background-color: #171717;
   color: #1d181f;
   height: 100%;
 }
-
 .movie-vote-green {
   color: #07d234;
   font-weight: 500;
@@ -22,6 +20,11 @@ body {
   font-weight: 500;
 }
 
+// login
+.error-login {
+  color: #ef5e5e;
+  font-size: 1.2em;
+}
 .auth-card {
   width: 400px;
   background-color: #302938;
@@ -30,18 +33,15 @@ body {
   border-radius: 10px;
   box-shadow: 6px 6px 20px #1d181f;
 }
-
 .auth-label {
   font-size: 1.2em;
 }
-
 .auth-icon {
   font-size: 7em;
   color: #fff;
   padding: 5px;
   text-shadow: 1px 1px 5px #1d181f;
 }
-
 .auth-btn {
   background-color: #8d7ff3;
   color: #fff;
@@ -51,11 +51,9 @@ body {
   padding: 10px 0;
   transition: 0.3s all ease-in-out;
 }
-
 .auth-btn:hover {
   background-color: #5e51f8;
 }
-
 .auth-input {
   font-weight: 400;
   font-size: 0.9em;
@@ -65,7 +63,6 @@ body {
   color: #fff;
   transition: 0.3s all ease-in-out;
 }
-
 .auth-input:focus {
   background-color: #47404f;
   border: 1px solid #393240;
@@ -73,60 +70,63 @@ body {
   font-weight: 400;
 }
 
+// movie random
 .random-card {
   height: 600px;
   background-repeat: no-repeat;
-  background-position: initial;
-  background-size: contain;
+  background-position: center;
+  background-size: cover;
   display: flex;
   align-items: center;
   position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  opacity: 0.8;
 }
-
 .random-card-vote {
   padding-left: 70px;
   color: #fff;
   font-weight: 700;
   text-shadow: 2px 2px 10px #171717;
+  opacity: 1;
 }
-
 .random-card-vote p {
   margin: 0;
 }
-
 .random-card-vote .vote {
   font-size: 5em;
+  transition: 0.3s ease-in-out;
 }
-
 .random-card-vote hr {
   width: 50px;
   height: 6px;
   margin: 0;
   background-color: #fff;
 }
-
 .random-card-info {
   padding-right: 25px;
   color: #fff;
   font-weight: 700;
   text-shadow: 2px 2px 10px #171717;
 }
-
 .random-card-info .title {
   font-size: 4em;
+  transition: 0.3s ease-in-out;
 }
-
 .random-card-info .overview {
   font-size: 1.2em;
+  font-weight: 300;
+}
+.random-card-info .title:hover {
+  color: #8d7ff3;
+}
+.random-card-vote .vote:hover {
+  color: #8d7ff3;
 }
 
-.error-login {
-  color: #ef5e5e;
-  font-size: 1.2em;
-}
-
+// movie display
 .movie-container {
-  margin: 35px 0;
+  margin: 35px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -137,11 +137,22 @@ body {
   width: 250px;
   height: 400px;
   color: #fff;
+  transition: 0.3s ease-in-out;
+}
+.movie-card:hover {
+  transform: translateY(-15px);
+  color: #8d7ff3;
+}
+.movie-card:hover .title {
+  color: #8d7ff3;
 }
 .movie-card .title {
   margin-bottom: 0;
   padding-top: 10px;
   font-size: 1.2em;
+  text-decoration: none;
+  color: #fff;
+  transition: 0.3s ease-in-out;
 }
 .movie-card .note {
   margin: 0;
@@ -155,10 +166,50 @@ body {
   height: 90%;
   margin: 0;
 }
+.movie-text {
+  margin: 25px 15px;
+}
+.movie-text hr {
+  width: 350px;
+  height: 6px;
+  margin: 0;
+  background-color: #fff;
+}
+.movie-text .title {
+  font-size: 6em;
+  font-weight: 600;
+  color: #fff;
+  transition: 0.3s ease-in-out;
+}
+.movie-text .title:hover {
+  color: #8d7ff3;
+}
+.movie-text .extra {
+  margin-top: 25px;
+  font-size: 1.3em;
+  color: #a8a8a8;
+}
 
+// movie nav
 .movie-nav {
   padding: 10px 35px;
   color: #fff;
   font-size: 1.5em;
   cursor: pointer;
+}
+.movie-nav p {
+  margin: 0;
+}
+.movie-nav:after {
+  display: block;
+  content: '';
+  width: 0;
+  height: 2px;
+  margin-top: 2px;
+  background: transparent;
+  transition: width 0.5s ease, background-color 0.5s ease;
+}
+.movie-nav:hover:after {
+  width: 100%;
+  background: #8d7ff3;
 }

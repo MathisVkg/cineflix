@@ -21,7 +21,6 @@ function App() {
             <Suspense fallback={null}>
               <Switch>
                 <Route path="/authentication/login" component={components.Login} />
-                <Route path="/accueil" component={components.Accueil} />
                 <PrivateRoute path="/" component={fulllayout} />
               </Switch>
             </Suspense>
