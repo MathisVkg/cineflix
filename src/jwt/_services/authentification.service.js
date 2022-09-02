@@ -12,7 +12,7 @@ export const authenticationService = {
 };
 
 function login(identite, motDePasse) {
-  const url = `https://localhost:44316/authentification`;
+  const url = `https://localhost:7126/authentification`;
 
   const requestOptions = {
     method: "POST",

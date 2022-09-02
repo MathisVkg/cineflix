@@ -17,16 +17,13 @@
         "react"
     ],
     "rules": {
-        //"import/no-duplicates": "warn",
         "react/prop-types": "off",
         "react/no-unescaped-entities": "off",
-        "react/destructuring-assignment": "warn",
         "object-shorthand": "warn",
         "space-before-blocks": "warn",
         "prefer-template": "warn",
         "dot-notation": "warn",
         "prefer-const": "warn",
-        "prefer-destructuring": "warn",
         "no-unused-vars": "warn",
         "react/no-unused-state": "warn",
         "react/self-closing-comp": "warn",
@@ -47,6 +44,5 @@
         "lines-between-class-members": "warn",
         "react/jsx-curly-brace-presence": "warn",
         "camelcase": "warn"
-//        "no-constructor-bind/no-constructor-bind": "warn"
     }
 }
