@@ -36,7 +36,8 @@ function Accueil() {
         className="random-card"
         style={{ backgroundImage: `url(${IMGPATH}${randomMovie?.backdrop_path})` }}
       >
-        <Row className="justify-content-between align-items-center w-100">
+        <span className="gradient" />
+        <Row className="justify-content-between align-items-center w-100 info-container">
           <Col sm="3" className="random-card-vote">
             <div className="mb-4">
               <p className="vote">{randomMovie?.vote_count}</p>
@@ -55,7 +56,6 @@ function Accueil() {
             </div>
           </Col>
         </Row>
-        <span className="gradient" />
       </Link>
       <div className="d-flex justify-content-center mt-5">
         <Nav>

@@ -367,3 +367,129 @@ body {
 .detail-movie-similar:hover img {
   width: 220px;
 }
+.movie-detail-button {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  padding-left: 50px;
+  padding-bottom: 50px;
+}
+.movie-detail-button i {
+  font-size: 1.5em;
+  cursor: pointer;
+  background-color: #8d7ff3;
+  padding: 1px 12px;
+  border-radius: 4px;
+  color: #fff;
+}
+.movie-detail-button .link-container input {
+  width: 320px;
+  padding: 4px 12px;
+  border-radius: 4px 0 0 4px;
+}
+.movie-detail-button .link-container i {
+  font-size: 1.2em;
+  border-radius: 0 4px 4px 0;
+}
+.movie-detail-button .link-container .error {
+  margin: 0;
+  position: absolute;
+  color: #e84343;
+  font-size: 1.3em;
+  font-weight: 400;
+  top: 40px;
+}
+.movie-detail-button a i {
+  padding: 4px 12px;
+}
+
+
+
+
+
+// media query
+@media only screen and (max-width: 600px) {
+  // movie random
+  .random-card {
+    background-position: center;
+  }
+  .random-card .info-container {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding-top: 120px;
+  }
+  .random-card .random-card-vote {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 35px;
+  }
+  .random-card .random-card-vote hr {
+    display: none;
+  }
+  .random-card .random-card-vote .vote {
+    font-size: 2em;
+  }
+  .random-card .random-card-info {
+    padding-left: 35px;
+    padding-right: unset;
+  }
+  .random-card .random-card-info .title {
+    font-size: 2em;
+  }
+  .random-card .random-card-info .overview {
+    font-size: 1em;
+  }
+
+  // movie display
+  .movie-container .movie-text hr {
+    width: unset;
+  }
+  .movie-container .movie-card {
+    width: 800px;
+  }
+
+
+  // movie detail
+  .movie-detail-poster {
+    background-position: center;
+  }
+  .movie-detail-info,
+  .movie-detail-button,
+  .movie-detail-overview,
+  .detail-movie-similar-container {
+    padding-left: 20px;
+  }
+  .movie-detail-info {
+    margin-bottom: 0;
+  }
+  .movie-detail-info .poster {
+    width: 150px;
+  }
+  .movie-detail-info .title, .movie-detail-overview .title {
+    font-size: 1.5em;
+  }
+  .movie-detail-info .genre,
+  .movie-detail-info .timer p,
+  .movie-detail-info .timer i,
+  .movie-detail-info .vote i,
+  .movie-detail-info .vote p {
+    font-size: 1.2em;
+  }
+  .movie-detail-button i, .movie-detail-button .link-container i {
+    font-size: 1.2em;
+  }
+  .movie-detail-button .link-container input {
+    width: 180px;
+    height: 30px;
+  }
+  .movie-detail-overview .overview {
+    font-size: 1em;
+  }
+  .detail-movie-similar-container .detail-movie-similar img {
+    min-height: 180px;
+    width: 130px;
+  }
+  .detail-movie-similar-container .detail-movie-similar p {
+    font-size: 1.1em;
+  }
+}
