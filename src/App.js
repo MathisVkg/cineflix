@@ -17,10 +17,13 @@ function App() {
     <ClearCacheProvider auto>
       <ContextProvider>
         <Provider store={configureStore()}>
-          <Router basename="/accueil" history={history}>
+          <Router basename="/" history={history}>
             <Suspense fallback={null}>
               <Switch>
                 <Route path="/authentication/login" component={components.Login} />
+                <Route path="/accueil" component={components.Accueil} />
+                <Route path="/movie-detail/:movieId" component={components.Detail} />
+                <Route path="/discover" component={components.Discover} />
                 <PrivateRoute path="/" component={fulllayout} />
               </Switch>
             </Suspense>

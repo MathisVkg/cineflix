@@ -3,7 +3,8 @@ import { lazy } from "react";
 const components = {
   Login: lazy(() => import("../components/Authentication/login")),
   Accueil: lazy(() => import("../components/Accueil/accueil")),
-  Detail: lazy(() => import("../components/Detail/Detail"))
+  Detail: lazy(() => import("../components/Detail/Detail")),
+  Discover: lazy(() => import("../components/Discover/Discover"))
 };
 
 export default components;
