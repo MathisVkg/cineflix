@@ -3,17 +3,22 @@ import { movieDbService } from "../../jwt/_services/movieDb.service";
 import { Col, Row } from "reactstrap";
 import { Link } from "react-router-dom";
 import NavBar from "../Navbar/Navbar";
-import { window } from "rxjs";
 
 function Accueil() {
   const [popularMovies, setPopularMovies] = useState([]);
   const [randomMovie, setRandomMovie] = useState({});
+  const [showArrowBtn, setShowArrowBtn] = useState(false);
   //
   const IMGPATH = "https://image.tmdb.org/t/p/w1280";
 
   useEffect(() => {
     getLastestMovie();
   }, []);
+
+  window.onscroll = function () {
+    if (window.scrollY > 150) setShowArrowBtn(true);
+    else setShowArrowBtn(false);
+  };
 
   const getLastestMovie = () => {
     movieDbService.getLastestMovie().then((result) => {
@@ -35,6 +40,7 @@ function Accueil() {
     <>
       <NavBar />
       <i
+        style={showArrowBtn ? { opacity: "1" } : { opacity: "0", zIndex: "-10" }}
         className="mdi mdi-arrow-up top-button"
         onClick={() => {
           window?.scrollTo(0, 0);

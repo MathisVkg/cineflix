@@ -5,6 +5,8 @@ import { aldebridService } from "../../jwt/_services/aldebrid.service";
 import { Input } from "reactstrap";
 import GetUserType from "../Functions/Token/GetUserType";
 import NavBar from "../Navbar/Navbar";
+import { viewListService } from "../../jwt/_services/viewList.service";
+import GetUtilisateurId from "../Functions/Token/GetUtilisateurId";
 
 function Detail() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -15,14 +17,17 @@ function Detail() {
   const [linkMovieDl, setLinkMovieDl] = useState("");
   const [linkLoaded, setLinkLoaded] = useState(false);
   const [errorAldebrid, setErrorAldebrid] = useState(false);
+  const [movieAlreadyInList, setMovieAlreadyInList] = useState(false);
   //
   const IMGPATH = "https://image.tmdb.org/t/p/w1280";
   const { movieId } = useParams();
   const userType = GetUserType();
+  const utilisateurId = GetUtilisateurId();
 
   useEffect(() => {
     getMovieDetail(movieId);
     getSimilarMovies(movieId);
+    getViewListUser();
   }, []);
 
   const getMovieDetail = (movieId) => {
@@ -38,6 +43,12 @@ function Detail() {
   const getSimilarMovies = (movieId) => {
     movieDbService.getSimilarMovies(movieId).then((result) => {
       setSimilarMovies(result?.results);
+    });
+  };
+
+  const getViewListUser = () => {
+    viewListService.getViewListUser(utilisateurId, movieId).then((result) => {
+      if (result.totalItems > 0) setMovieAlreadyInList(true);
     });
   };
 
@@ -61,6 +72,28 @@ function Detail() {
     );
   };
 
+  const addViewList = () => {
+    const values = {
+      movieId,
+      utilisateurId
+    };
+    viewListService.addViewList(values).then(() => {
+      setMovieAlreadyInList(true);
+    });
+  };
+
+  const removeViewList = () => {
+    const values = {
+      movieId,
+      utilisateurId
+    };
+    viewListService.removeViewList(values).then(() => {
+      setMovieAlreadyInList(false);
+    });
+  };
+
+  //
+
   const calculateTime = (movieTime) => {
     let timer = 0;
     if (movieTime > 60 && movieTime < 120) {
@@ -69,40 +102,6 @@ function Detail() {
       timer = `2h${movieTime % 60 < 10 ? "0" : ""}${movieTime % 60}`;
     } else timer = movieTime;
     return timer;
-  };
-
-  const generateStar = (movieVote) => {
-    if (movieVote === undefined) return;
-    if (movieVote > 7) {
-      return (
-        <div className="d-flex align-items-center">
-          <i className="mdi mdi-star" style={{ color: "#d99c22" }} />
-          <i className="mdi mdi-star" style={{ color: "#d99c22" }} />
-          <i className="mdi mdi-star" style={{ color: "#d99c22" }} />
-          <i className="mdi mdi-star" style={{ color: "#d99c22" }} />
-          <i className="mdi mdi-star" />
-        </div>
-      );
-    } else if (movieVote > 3 && movieVote < 7) {
-      return (
-        <div className="d-flex align-items-center">
-          <i className="mdi mdi-star" style={{ color: "#d99c22" }} />
-          <i className="mdi mdi-star" style={{ color: "#d99c22" }} />
-          <i className="mdi mdi-star" style={{ color: "#d99c22" }} />
-          <i className="mdi mdi-star" />
-          <i className="mdi mdi-star" />
-        </div>
-      );
-    }
-    return (
-      <div className="d-flex align-items-center">
-        <i className="mdi mdi-star" style={{ color: "#d99c22" }} />
-        <i className="mdi mdi-star" style={{ color: "#d99c22" }} />
-        <i className="mdi mdi-star" />
-        <i className="mdi mdi-star" />
-        <i className="mdi mdi-star" />
-      </div>
-    );
   };
 
   const movieRedirection = (id) => {
@@ -137,7 +136,22 @@ function Detail() {
                   <p className="ml-2">{calculateTime(movie?.runtime)}</p>
                 </div>
                 <div className="d-flex vote">
-                  {generateStar(movie?.vote_average)}
+                  <div className="d-flex align-items-center">
+                    <i className="mdi mdi-star" style={{ color: "#d99c22" }} />
+                    <i className="mdi mdi-star" style={{ color: "#d99c22" }} />
+                    <i
+                      className="mdi mdi-star"
+                      style={movie?.vote_average > 3 ? { color: "#d99c22" } : { color: "#fff" }}
+                    />
+                    <i
+                      className="mdi mdi-star"
+                      style={movie?.vote_average > 6 ? { color: "#d99c22" } : { color: "#fff" }}
+                    />
+                    <i
+                      className="mdi mdi-star"
+                      style={movie?.vote_average > 9 ? { color: "#d99c22" } : { color: "#fff" }}
+                    />
+                  </div>
                   <p className="ml-2">
                     {movie?.vote_average?.toFixed(1)} <span className="ml-3">({movie?.vote_count})</span>
                   </p>
@@ -145,7 +159,16 @@ function Detail() {
               </div>
             </div>
             <div className="movie-detail-button">
-              <i className="mdi mdi-plus mr-4" />
+              {utilisateurId &&
+                (movieAlreadyInList ? (
+                  <i className="mdi mdi-minus mr-4" onClick={() => removeViewList()}>
+                    <span className="ml-2">Watch list</span>
+                  </i>
+                ) : (
+                  <i className="mdi mdi-plus mr-4" onClick={() => addViewList()}>
+                    <span className="ml-2">Watch list</span>
+                  </i>
+                ))}
               {showInput ? (
                 <div className="d-flex link-container position-relative">
                   <Input
@@ -172,7 +195,9 @@ function Detail() {
                       setShowInput(true);
                       setLinkMovieDl("");
                     }}
-                  />
+                  >
+                    <span className="ml-2">Download movie</span>
+                  </i>
                 )
               )}
               {linkLoaded && (

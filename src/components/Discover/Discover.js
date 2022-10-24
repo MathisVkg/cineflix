@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { movieDbService } from "../../jwt/_services/movieDb.service";
 import Navbar from "../Navbar/Navbar";
-import { window } from "rxjs";
 import { Button, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -12,6 +11,7 @@ function Discover() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [activePage, setActivePage] = useState(1);
   const [showGenre, setShowGenre] = useState(false);
+  const [showArrowBtn, setShowArrowBtn] = useState(false);
   //
   const IMGPATH = "https://image.tmdb.org/t/p/w1280";
 
@@ -22,6 +22,11 @@ function Discover() {
   useEffect(() => {
     getGenreMovies();
   }, []);
+
+  window.onscroll = function () {
+    if (window.scrollY > 150) setShowArrowBtn(true);
+    else setShowArrowBtn(false);
+  };
 
   const getDiscoverMovies = () => {
     movieDbService.getDiscoverMovies(genreSelected, activePage).then(
@@ -45,6 +50,7 @@ function Discover() {
         <>
           <Navbar />
           <i
+            style={showArrowBtn ? { opacity: "1" } : { opacity: "0", zIndex: "-10" }}
             className="mdi mdi-arrow-up top-button"
             onClick={() => {
               window?.scrollTo(0, 0);
@@ -89,7 +95,7 @@ function Discover() {
                           : "movie-vote-red"
                       }`}
                     >
-                      {vote_average}
+                      {vote_average?.toFixed(1)}
                     </p>
                   </div>
                 </Link>
