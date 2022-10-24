@@ -1,7 +1,5 @@
 import { handleResponse } from "../_helpers";
-import accueil from "../../components/Accueil/accueil";
 
-const apiKey = "ec49e277da2875a3e7b4b443bb5f1975";
 export const movieDbService = {
   getLastestMovie,
   getMovieDetail,
@@ -12,7 +10,8 @@ export const movieDbService = {
 };
 
 function getLastestMovie() {
-  const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`;
+  // eslint-disable-next-line no-undef
+  const url = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_APIMOVIEDB}&language=en-US&page=1`;
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" }
@@ -26,7 +25,8 @@ function getLastestMovie() {
 }
 
 function getMovieDetail(movieId) {
-  const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`;
+  // eslint-disable-next-line no-undef
+  const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.REACT_APP_APIMOVIEDB}&language=en-US`;
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" }
@@ -40,7 +40,8 @@ function getMovieDetail(movieId) {
 }
 
 function getSimilarMovies(movieId) {
-  const url = `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${apiKey}&language=en-US&language=en-US&page=1`;
+  // eslint-disable-next-line no-undef
+  const url = `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${process.env.REACT_APP_APIMOVIEDB}&language=en-US&language=en-US&page=1`;
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" }
@@ -54,7 +55,8 @@ function getSimilarMovies(movieId) {
 }
 
 function searchMovie(movieString) {
-  const url = `https://api.themoviedb.org/3/search/company?api_key=${apiKey}&query=${movieString}&page=1`;
+  // eslint-disable-next-line no-undef
+  const url = `https://api.themoviedb.org/3/search/company?api_key=${process.env.REACT_APP_APIMOVIEDB}&query=${movieString}&page=1`;
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" }
@@ -68,7 +70,8 @@ function searchMovie(movieString) {
 }
 
 function getDiscoverMovies(genre, activePage) {
-  let url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${activePage}&with_watch_monetization_types=flatrate`;
+  // eslint-disable-next-line no-undef
+  let url = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_APIMOVIEDB}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${activePage}&with_watch_monetization_types=flatrate`;
   if (genre !== 0) url += `&with_genres=${genre}`;
 
   const requestOptions = {
@@ -84,7 +87,8 @@ function getDiscoverMovies(genre, activePage) {
 }
 
 function getGenreMovies() {
-  const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`;
+  // eslint-disable-next-line no-undef
+  const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_APIMOVIEDB}&language=en-US`;
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" }

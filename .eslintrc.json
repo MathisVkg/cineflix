@@ -24,7 +24,7 @@
         "prefer-template": "warn",
         "dot-notation": "warn",
         "prefer-const": "warn",
-        "no-unused-vars": "warn",
+//        "no-unused-vars": "warn",
         "react/no-unused-state": "warn",
         "react/self-closing-comp": "warn",
         "react/jsx-fragments": "warn",
