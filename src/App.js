@@ -1,36 +1,17 @@
-import React, { Suspense } from "react";
-import { Router, Route, Switch } from "react-router-dom";
-import { ClearCacheProvider } from "react-clear-cache";
-import PrivateRoute from "./layout/PrivateRoute";
-
-import { configureStore } from "./redux/store";
-import { ContextProvider } from "./context/ContextProvider";
-import { Provider } from "react-redux";
-
-import { history } from "./jwt/_helpers";
-
-import components from "./layout/components";
-import fulllayout from "./layout/fulllayout";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import WithNavbar from "./layout/WithNavbar";
+import components from "./layout/component";
 
 function App() {
   return (
-    <ClearCacheProvider auto>
-      <ContextProvider>
-        <Provider store={configureStore()}>
-          <Router basename="/" history={history}>
-            <Suspense fallback={null}>
-              <Switch>
-                <Route path="/authentication/login" component={components.Login} />
-                <Route path="/accueil" component={components.Accueil} />
-                <Route path="/movie-detail/:movieId" component={components.Detail} />
-                <Route path="/discover" component={components.Discover} />
-                <PrivateRoute path="/" component={fulllayout} />
-              </Switch>
-            </Suspense>
-          </Router>
-        </Provider>
-      </ContextProvider>
-    </ClearCacheProvider>
+    <div className="app-container">
+      <Routes>
+        <Route path="/" element={<WithNavbar component={components.Accueil} />} />
+        <Route path="/discover" element={<WithNavbar component={components.Discover} />} />
+        <Route path="/movie-detail/:movieId" element={<WithNavbar component={components.Detail} />} />
+      </Routes>
+    </div>
   );
 }
 

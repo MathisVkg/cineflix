@@ -1,12 +1,8 @@
 import { authenticationService } from "../_services/authentification.service";
 
-/**
- * Retourne toutes les requêtes sur l'API avec le Bearer Token de l'utilisateur.
- */
 export function authHeader(json = false, file = false, custom = false, excel = false, zip = false) {
   const currentUser = authenticationService.currentUserValue;
 
-  // Si l'utilisateur est stocké dans le navigateur et que celui-ci possède le token, on envoie le token.
   if (currentUser?.token) {
     if (json) return { Authorization: `Bearer ${currentUser.token}`, "Content-Type": "application/json" };
     if (file) return { Authorization: `Bearer ${currentUser.token}`, "Content-Type": "multipart/form-data" };

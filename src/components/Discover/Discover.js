@@ -1,113 +1,108 @@
 import React, { useEffect, useState } from "react";
-import { movieDbService } from "../../jwt/_services/movieDb.service";
-import Navbar from "../Navbar/Navbar";
-import { Button, Col } from "reactstrap";
+import { themoviedbService } from "../../jwt/_services/themoviedb.service";
 import { Link } from "react-router-dom";
+import { Button } from "reactstrap";
 
 function Discover() {
-  const [moviesList, setMoviesList] = useState([]);
-  const [genres, setGenres] = useState([]);
-  const [genreSelected, setGenreSelected] = useState(28);
   const [isLoaded, setIsLoaded] = useState(false);
   const [activePage, setActivePage] = useState(1);
-  const [showGenre, setShowGenre] = useState(false);
-  const [showArrowBtn, setShowArrowBtn] = useState(false);
-  //
+  const [genreSelected, setGenreSelected] = useState(0);
+  const [activeMovie, setActiveMovie] = useState(0);
+  const [moviesDiscover, setMoviesDiscover] = useState([]);
+  const [genres, setGenres] = useState([]);
+  const [showBackBtn, setShowBackBtn] = useState(false);
   const IMGPATH = "https://image.tmdb.org/t/p/w1280";
-
-  useEffect(() => {
-    getDiscoverMovies();
-  }, [activePage, genreSelected]);
 
   useEffect(() => {
     getGenreMovies();
   }, []);
 
-  window.onscroll = function () {
-    if (window.scrollY > 150) setShowArrowBtn(true);
-    else setShowArrowBtn(false);
-  };
+  useEffect(() => {
+    getDiscoverMovies();
+  }, [activePage, genreSelected]);
 
-  const getDiscoverMovies = () => {
-    movieDbService.getDiscoverMovies(genreSelected, activePage).then(
-      (result) => {
-        setMoviesList((prevState) => [...prevState, ...result.results]);
-        setIsLoaded(true);
-      },
-      () => setIsLoaded(true)
-    );
+  window.onscroll = function () {
+    if (window.scrollY > 150) setShowBackBtn(true);
+    else setShowBackBtn(false);
   };
 
   const getGenreMovies = () => {
-    movieDbService.getGenreMovies().then((result) => {
+    themoviedbService.getGenreMovies().then((result) => {
       setGenres(result.genres);
     });
   };
 
+  const getDiscoverMovies = () => {
+    themoviedbService.getDiscoverMovies(activePage, genreSelected).then((result) => {
+      setMoviesDiscover((prevState) => [...prevState, ...result.results]);
+      setIsLoaded(true);
+    });
+  };
+
+  const changeMovieGenre = (id) => {
+    setGenreSelected(genreSelected === id ? 0 : id);
+    setMoviesDiscover([]);
+  };
+
   return (
-    <div>
-      {isLoaded && (
-        <>
-          <Navbar />
-          <i
-            style={showArrowBtn ? { opacity: "1" } : { opacity: "0", zIndex: "-10" }}
-            className="mdi mdi-arrow-up top-button"
-            onClick={() => {
-              window?.scrollTo(0, 0);
-            }}
-          />
-          <div className="top-container-discover">
-            <p className="title" onClick={() => setShowGenre(true)}>
-              MOVIE GENRE: {genres?.find((elem) => elem.id === genreSelected)?.name}
-            </p>
+    <div className="discover-container">
+      <i
+        style={showBackBtn ? { opacity: "1" } : { opacity: "0", zIndex: "-10" }}
+        className="fa-solid fa-arrow-up top-button"
+        onClick={() => {
+          window?.scrollTo(0, 0);
+        }}
+      />
+      <div className="genre-container">
+        {genres?.map(({ id, name }, index) => (
+          <p className={genreSelected === id ? "active-link" : "link"} key={index} onClick={() => changeMovieGenre(id)}>
+            {name}
+          </p>
+        ))}
+      </div>
+      <div className="movies-container">
+        {isLoaded ? (
+          moviesDiscover?.map(({ id, poster_path, title, overview, vote_average, vote_count }, index) => (
             <div
-              className="genre-container-list"
-              style={showGenre ? { opacity: "1" } : { opacity: "0", zIndex: "-10" }}
+              className={`${
+                activeMovie === id && activeMovie !== 0 ? "active-card animate__animated animate__fadeIn" : "movie-card"
+              }`}
+              key={index}
+              onClick={() => activeMovie !== id && setActiveMovie(id)}
             >
-              <i className="mdi mdi-close" onClick={() => setShowGenre(false)} />
-              {genres?.map(({ id, name }, index) => (
-                <p
-                  key={index}
-                  onClick={() => {
-                    setGenreSelected(id === genreSelected ? 0 : id);
-                    setShowGenre(false);
-                    setMoviesList([]);
-                  }}
-                >
-                  {name}
-                </p>
-              ))}
-            </div>
-          </div>
-          <div className="movie-container" style={{ margin: "0 35px 35px 35px" }}>
-            {moviesList?.map(({ poster_path, vote_average, title, id }, index) => (
-              <Col key={index} sm="auto" className="movie-card">
-                <Link to={`/movie-detail/${id}`}>
-                  <img src={`${IMGPATH}${poster_path}`} alt={title} className="movie-card-back" />
-                  <div className="d-flex align-items-center justify-content-between">
-                    <p className="title">{title}</p>
-                    <p
-                      className={`note ${
-                        vote_average > 7
-                          ? "movie-vote-green"
-                          : vote_average > 3
-                          ? "movie-vote-orange"
-                          : "movie-vote-red"
-                      }`}
-                    >
-                      {vote_average?.toFixed(1)}
+              {activeMovie === id && <i className="fa-solid fa-xmark" onClick={() => setActiveMovie(0)} />}
+              <div className="d-flex flex-column">
+                <img src={`${IMGPATH}${poster_path}`} alt={title} />
+                <p className="title">{title}</p>
+              </div>
+              {activeMovie === id && (
+                <div className="right-container">
+                  <p className="overview">{overview}</p>
+                  <div className="d-flex align-items-center mt-4">
+                    <p className={`vote-average ${vote_average > 3 ? (vote_average > 7 ? "green" : "orange") : "red"}`}>
+                      {vote_average}
                     </p>
+                    <p className="vote-count">({vote_count})</p>
                   </div>
-                </Link>
-              </Col>
-            ))}
+                  <Link to={`movie-detail/${id}`}>
+                    <span>Get more detail</span> <i className="fa-solid fa-arrow-right" />
+                  </Link>
+                </div>
+              )}
+            </div>
+          ))
+        ) : (
+          <div>
+            <p>chargement</p>
           </div>
-          <div className="d-flex justify-content-center" style={{ marginBottom: "70px" }}>
-            <Button className="loading-btn" onClick={() => setActivePage(activePage + 1)}>
-              Load more
-            </Button>
-          </div>
-        </>
+        )}
+      </div>
+      {isLoaded && (
+        <div className="d-flex justify-content-center" style={{ marginBottom: "70px" }}>
+          <Button className="loading-btn" onClick={() => setActivePage(activePage + 1)}>
+            Load more
+          </Button>
+        </div>
       )}
     </div>
   );

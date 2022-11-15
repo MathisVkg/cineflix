@@ -1,0 +1,84 @@
+html {
+  scroll-behavior: smooth;
+}
+body {
+  height: 100vh;
+  background-color: #282828;
+  color: #fff;
+  scroll-behavior: smooth;
+  font-family: 'Work Sans', sans-serif;
+}
+a:hover {
+  text-decoration: none;
+}
+
+.top-button {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  padding: 10px;
+  background-color: #fff;
+  color: #282828;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+// navbar
+.navbar-container nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  background-color: rgba(54, 54, 54, 0.84);
+
+  animation: fadeIn;
+  animation-duration: 2s;
+}
+.navbar-container nav .logo {
+  font-size: 1.7em;
+  color: #fff;
+  margin-left: 40px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.navbar-container nav .logo:hover {
+  color: #54de98;
+}
+.navbar-container nav .right-container {
+  margin-right: 40px;
+}
+.navbar-container nav .right-container .link {
+  font-size: 1.2em;
+  color: #fff;
+  margin: 0 15px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease-in-out;
+}
+.navbar-container nav .right-container .link:hover {
+  color: #54de98;
+}
+.navbar-container nav .right-container .active-link {
+  font-size: 1.2em;
+  color: #54de98;
+  margin: 0 15px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease-in-out;
+}
+.navbar-container nav .right-container .connexion-btn {
+  color: #fff;
+  font-weight: 600;
+  padding: 5px 30px;
+  background-color: unset;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  margin: 0 15px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.navbar-container nav .right-container .connexion-btn:hover {
+  background-color: #fff;
+  color: #54de98;
+}
