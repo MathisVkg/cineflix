@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "../Components/Nav/Navbar";
 import { authenticationService } from "../jwt/_services/authentification.service";
+import Navbar from "../components/Nav/Navbar";
 
 function WithNavbar({ component }) {
   const currentUser = authenticationService.currentUserValue;

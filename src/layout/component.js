@@ -1,7 +1,7 @@
 import React from "react";
-import Accueil from "../Components/Acceuil/Accueil";
-import Discover from "../Components/Discover/Discover";
-import DetailMovie from "../Components/DetailMovie/DetailMovie";
+import Accueil from "../components/Acceuil/Accueil";
+import Discover from "../components/Discover/Discover";
+import DetailMovie from "../components/DetailMovie/DetailMovie";
 
 const components = {
   Accueil: <Accueil />,

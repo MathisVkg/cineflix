@@ -1,6 +1,7 @@
 html {
   scroll-behavior: smooth;
 }
+
 body {
   height: 100vh;
   background-color: #282828;
@@ -8,6 +9,7 @@ body {
   scroll-behavior: smooth;
   font-family: 'Work Sans', sans-serif;
 }
+
 a:hover {
   text-decoration: none;
 }
@@ -24,6 +26,18 @@ a:hover {
   transition: 0.3s ease-in-out;
 }
 
+.green {
+  color: #3bd06d;
+}
+
+.orange {
+  color: #f57d38;
+}
+
+.red {
+  color: #ef5a5a;
+}
+
 // navbar
 .navbar-container nav {
   display: flex;
@@ -32,9 +46,10 @@ a:hover {
   padding: 10px 0;
   background-color: rgba(54, 54, 54, 0.84);
 
-  animation: fadeIn;
-  animation-duration: 2s;
+  //animation: fadeIn;
+  //animation-duration: 2s;
 }
+
 .navbar-container nav .logo {
   font-size: 1.7em;
   color: #fff;
@@ -42,12 +57,15 @@ a:hover {
   cursor: pointer;
   transition: 0.3s ease-in-out;
 }
+
 .navbar-container nav .logo:hover {
   color: #54de98;
 }
+
 .navbar-container nav .right-container {
   margin-right: 40px;
 }
+
 .navbar-container nav .right-container .link {
   font-size: 1.2em;
   color: #fff;
@@ -56,9 +74,11 @@ a:hover {
   font-weight: 600;
   transition: 0.3s ease-in-out;
 }
+
 .navbar-container nav .right-container .link:hover {
   color: #54de98;
 }
+
 .navbar-container nav .right-container .active-link {
   font-size: 1.2em;
   color: #54de98;
@@ -67,6 +87,7 @@ a:hover {
   font-weight: 600;
   transition: 0.3s ease-in-out;
 }
+
 .navbar-container nav .right-container .connexion-btn {
   color: #fff;
   font-weight: 600;
@@ -78,7 +99,122 @@ a:hover {
   cursor: pointer;
   transition: 0.3s ease-in-out;
 }
+
 .navbar-container nav .right-container .connexion-btn:hover {
   background-color: #fff;
   color: #54de98;
+}
+
+// loading animation
+.loading-container {
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  background-color: #282828;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s ease-in-out;
+}
+
+.loading-container .loading-block {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  animation: zoomOut;
+  animation-delay: 1.5s;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.loading-container .loading-block h2 {
+  position: absolute;
+  font-size: 3em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #54de98;
+  font-weight: 600;
+  animation: animaTypeOpacity;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.loading-container .loading-block span {
+  position: absolute;
+  background-color: #54de98;
+  transition: 0.3s ease-in-out;
+}
+
+.loading-container .loading-block span:nth-child(1) {
+  top: 0;
+  left: 0;
+  height: 0;
+  width: 3px;
+  animation: animaType2;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.loading-container .loading-block span:nth-child(2) {
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  animation: animaType1;
+  animation-duration: 0.5s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.loading-container .loading-block span:nth-child(3) {
+  top: 0;
+  right: 0;
+  height: 0;
+  width: 3px;
+  animation: animaType2;
+  animation-duration: 0.5s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.loading-container .loading-block span:nth-child(4) {
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  animation: animaType1;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes animaType1 {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes animaType2 {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+@keyframes animaTypeOpacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { themoviedbService } from "../../jwt/_services/themoviedb.service";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
+import Loading from "../LoadingAnimation/Loading";
 
 function Discover() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -15,6 +16,7 @@ function Discover() {
 
   useEffect(() => {
     getGenreMovies();
+    document.body.style.overflow = null;
   }, []);
 
   useEffect(() => {
@@ -44,67 +46,91 @@ function Discover() {
     setMoviesDiscover([]);
   };
 
+  const changeMovieView = (id) => {
+    if (activeMovie !== id) {
+      setActiveMovie(id);
+      document.body.style.overflow = "hidden";
+    }
+  };
+
   return (
-    <div className="discover-container">
-      <i
-        style={showBackBtn ? { opacity: "1" } : { opacity: "0", zIndex: "-10" }}
-        className="fa-solid fa-arrow-up top-button"
-        onClick={() => {
-          window?.scrollTo(0, 0);
-        }}
-      />
-      <div className="genre-container">
-        {genres?.map(({ id, name }, index) => (
-          <p className={genreSelected === id ? "active-link" : "link"} key={index} onClick={() => changeMovieGenre(id)}>
-            {name}
-          </p>
-        ))}
-      </div>
-      <div className="movies-container">
-        {isLoaded ? (
-          moviesDiscover?.map(({ id, poster_path, title, overview, vote_average, vote_count }, index) => (
-            <div
-              className={`${
-                activeMovie === id && activeMovie !== 0 ? "active-card animate__animated animate__fadeIn" : "movie-card"
-              }`}
+    <>
+      <Loading />
+      <div className="discover-container">
+        <i
+          style={showBackBtn ? { opacity: "1" } : { opacity: "0", zIndex: "-10" }}
+          className="fa-solid fa-arrow-up top-button"
+          onClick={() => {
+            window?.scrollTo(0, 0);
+          }}
+        />
+        <div className="genre-container">
+          {genres?.map(({ id, name }, index) => (
+            <p
+              className={genreSelected === id ? "active-link" : "link"}
               key={index}
-              onClick={() => activeMovie !== id && setActiveMovie(id)}
+              onClick={() => changeMovieGenre(id)}
             >
-              {activeMovie === id && <i className="fa-solid fa-xmark" onClick={() => setActiveMovie(0)} />}
-              <div className="d-flex flex-column">
+              {name}
+            </p>
+          ))}
+        </div>
+        <div className="movies-container" id="movies-container">
+          {isLoaded ? (
+            moviesDiscover?.map(({ id, poster_path, title, overview, vote_average, vote_count }, index) => (
+              <div
+                className={`${
+                  activeMovie === id && activeMovie !== 0
+                    ? "active-card animate__animated animate__fadeIn"
+                    : "movie-card"
+                }`}
+                key={index}
+                onClick={() => changeMovieView(id)}
+              >
+                {activeMovie === id && (
+                  <i
+                    className="fa-solid fa-xmark"
+                    onClick={() => {
+                      setActiveMovie(0);
+                      document.body.style.overflow = null;
+                    }}
+                  />
+                )}
                 <img src={`${IMGPATH}${poster_path}`} alt={title} />
-                <p className="title">{title}</p>
-              </div>
-              {activeMovie === id && (
-                <div className="right-container">
-                  <p className="overview">{overview}</p>
-                  <div className="d-flex align-items-center mt-4">
-                    <p className={`vote-average ${vote_average > 3 ? (vote_average > 7 ? "green" : "orange") : "red"}`}>
-                      {vote_average}
-                    </p>
-                    <p className="vote-count">({vote_count})</p>
+                {activeMovie === id && (
+                  <div className="right-container">
+                    <p className="title">{title}</p>
+                    <p className="overview">{overview}</p>
+                    <div className="d-flex align-items-center mt-4">
+                      <p
+                        className={`vote-average ${vote_average > 3 ? (vote_average > 7 ? "green" : "orange") : "red"}`}
+                      >
+                        {vote_average?.toFixed(1)}
+                      </p>
+                      <p className="vote-count">({vote_count})</p>
+                    </div>
+                    <Link to={`/movie-detail/${id}`}>
+                      <span>Get more detail</span> <i className="fa-solid fa-arrow-right" />
+                    </Link>
                   </div>
-                  <Link to={`movie-detail/${id}`}>
-                    <span>Get more detail</span> <i className="fa-solid fa-arrow-right" />
-                  </Link>
-                </div>
-              )}
+                )}
+              </div>
+            ))
+          ) : (
+            <div>
+              <p>chargement</p>
             </div>
-          ))
-        ) : (
-          <div>
-            <p>chargement</p>
+          )}
+        </div>
+        {isLoaded && (
+          <div className="d-flex justify-content-center" style={{ marginBottom: "70px" }}>
+            <Button className="loading-btn" onClick={() => setActivePage(activePage + 1)}>
+              Load more
+            </Button>
           </div>
         )}
       </div>
-      {isLoaded && (
-        <div className="d-flex justify-content-center" style={{ marginBottom: "70px" }}>
-          <Button className="loading-btn" onClick={() => setActivePage(activePage + 1)}>
-            Load more
-          </Button>
-        </div>
-      )}
-    </div>
+    </>
   );
 }
 
