@@ -5,7 +5,8 @@ export const themoviedbService = {
   getDiscoverMovies,
   getGenreMovies,
   getDetailMovie,
-  getSimilarMovies
+  getSimilarMovies,
+  getUpcoming
 };
 
 function getPopularMovies() {
@@ -75,7 +76,22 @@ function getDetailMovie(movieId) {
 
 function getSimilarMovies(movieId) {
   // eslint-disable-next-line no-undef
-  const url = `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${process.env?.REACT_APP_THEMOVIEDBKEY}&language=en-US&page=1`;
+  const url = `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${process.env?.REACT_APP_THEMOVIEDBKEY}&language=en-US&page=1`;
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" }
+  };
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((reponse) => {
+      return reponse;
+    });
+}
+
+function getUpcoming() {
+  // eslint-disable-next-line no-undef
+  const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env?.REACT_APP_THEMOVIEDBKEY}&language=en-US&page=1`;
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" }

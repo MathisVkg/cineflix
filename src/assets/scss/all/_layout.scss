@@ -3,21 +3,69 @@
   font-size: 3em;
   font-weight: 600;
   margin-left: 50px;
-  margin-top: 50px;
+}
+.accueil-container .up-coming-container {
+  margin-top: 200px;
+}
+.accueil-container .bottom-container {
+  margin-top: 150px;
+}
+.accueil-container .selected-movie {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+.accueil-container .selected-movie .backdrop-img {
+  width: 100vw;
+  height: 300px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.3;
+ }
+.accueil-container .selected-movie .info {
+  position: absolute;
+  top: 65px;
+  display: flex;
+  align-items: end;
+  padding: 15px 15px 0 35px;
+}
+.accueil-container .selected-movie .info img {
+  width: 200px;
+  border-radius: 6px;
+  margin-right: 20px;
+}
+.accueil-container .selected-movie .info .title {
+  font-size: 3em;
+  font-weight: 500;
+  margin-top: 10px;
+  text-shadow: 5px 5px 10px rgba(40, 40, 40, 0.65);
+}
+.accueil-container .selected-movie .info .vote-average {
+  font-size: 1.3em;
+  font-weight: 600;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.accueil-container .selected-movie .info .vote-count {
+  font-size: 1.3em;
+  font-weight: 300;
+  margin-left: 20px;
 }
 
 // card
 .movies-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 50px;
-
+  padding: 20px;
   //animation: fadeInUp;
   //animation-duration: 2s;
 }
 
 .movies-container .active-card {
+  z-index: 1000;
   position: fixed;
   display: flex;
   align-items: center;
@@ -149,7 +197,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 35px;
-  overflow-y: scroll;
+  overflow-x: scroll;
   padding: 15px 0;
 
   //animation: fadeIn;
@@ -237,7 +285,8 @@
 }
 .movie-detail-container .right-container .overview {
   font-weight: 300;
-  margin: 50px 0;
+  margin-top: 40px;
+  margin-bottom: 5px;
 }
 .movie-detail-container .right-container .vote-average {
   font-size: 1.3em;
@@ -255,8 +304,8 @@
 
 .movie-detail-container .right-container .similar-movies {
   display: flex;
-  overflow-y: scroll;
-  padding: 35px 0;
+  overflow-x: scroll;
+  padding: 15px 0;
 }
 .movie-detail-container .right-container .similar-movies .movie-card {
   display: flex;
@@ -284,7 +333,28 @@
 @media only screen and (max-width: 600px) {
   .accueil-container h2 {
     margin-left: 25px;
-    font-size: 2.5em;
+    font-size: 1.7em;
+  }
+  .accueil-container .selected-movie .info {
+    top: 205px;
+  }
+  .accueil-container .selected-movie .info img {
+    width: 100px;
+  }
+  .accueil-container .selected-movie .info .title {
+    font-size: 1.2em;
+  }
+  .accueil-container .selected-movie .info .vote-average {
+    font-size: 1em;
+  }
+  .accueil-container .selected-movie .info .vote-count {
+    font-size: 1em;
+  }
+  .accueil-container .up-coming-container {
+    margin-top: 150px;
+  }
+  .accueil-container .bottom-container {
+    margin-top: 50px;
   }
   // movie card
   .movies-container {

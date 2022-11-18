@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { themoviedbService } from "../../jwt/_services/themoviedb.service";
 import { Link } from "react-router-dom";
-import { Button } from "reactstrap";
+import { Button, Spinner } from "reactstrap";
 import Loading from "../LoadingAnimation/Loading";
 
 function Discover() {
@@ -75,7 +75,7 @@ function Discover() {
             </p>
           ))}
         </div>
-        <div className="movies-container" id="movies-container">
+        <div className="movies-container flex-wrap justify-content-center" id="movies-container">
           {isLoaded ? (
             moviesDiscover?.map(({ id, poster_path, title, overview, vote_average, vote_count }, index) => (
               <div
@@ -118,7 +118,7 @@ function Discover() {
             ))
           ) : (
             <div>
-              <p>chargement</p>
+              <Spinner>Loading...</Spinner>
             </div>
           )}
         </div>

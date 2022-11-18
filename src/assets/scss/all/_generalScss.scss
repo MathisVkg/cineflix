@@ -38,6 +38,15 @@ a:hover {
   color: #ef5a5a;
 }
 
+.spinner-border {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.spinner-border span {
+  display: none;
+
+}
 // navbar
 .navbar-container nav {
   display: flex;
@@ -118,7 +127,7 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: 0.3s ease-in-out;
+  transition: 0.6s ease-in-out;
 }
 
 .loading-container .loading-block {
