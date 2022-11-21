@@ -1,23 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "reactstrap";
+import GetUserType from "../Functions/Token/GetUserType";
 
 function Navbar() {
+  const [openNavMenu, setSetOpenNavMenu] = useState(false);
+  const userType = GetUserType();
+  console.log(userType);
+
   return (
     <div className="navbar-container">
       <nav>
-        <Link to="/" className="logo">
-          <i className="fa-solid fa-torii-gate" />
-        </Link>
-        <div className="right-container">
-          <Link to="/discover" className={window.location.pathname === "discover" ? "active-link" : "link"}>
-            Discover
+        <div className="d-flex align-items-center justify-content-between">
+          <Link to="/" className="logo">
+            <i className="fa-solid fa-torii-gate" />
           </Link>
-          <Link to="/profile" className={window.location.pathname === "profile" ? "active-link" : "link"}>
-            Profile
-          </Link>
-          <button className="connexion-btn">Sign in</button>
+          <i className="fa-solid fa-arrow-left" onClick={() => setSetOpenNavMenu(true)} />
         </div>
-        {/* <i className="fa-solid fa-bars" />*/}
+        <div className={`hidden-container ${openNavMenu && "active"}`}>
+          <div className="d-flex flex-column link-container">
+            <i className="fa-solid fa-arrow-right" onClick={() => setSetOpenNavMenu(false)} />
+            <Link
+              to="discover"
+              className={openNavMenu && "animate__animated animate__fadeInUp"}
+              onClick={() => setSetOpenNavMenu(false)}
+            >
+              Discover
+            </Link>
+            <Link
+              to="profile"
+              className={openNavMenu && "animate__animated animate__fadeInUp"}
+              onClick={() => setSetOpenNavMenu(false)}
+            >
+              Profile
+            </Link>
+          </div>
+          <Button onClick={() => window.location.assign("auth")}>Sign in</Button>
+        </div>
       </nav>
     </div>
   );

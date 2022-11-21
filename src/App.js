@@ -10,6 +10,7 @@ function App() {
         <Route path="/" element={<WithNavbar component={components.Accueil} />} />
         <Route path="/discover" element={<WithNavbar component={components.Discover} />} />
         <Route path="/movie-detail/:movieId" element={<WithNavbar component={components.Detail} />} />
+        <Route path="/auth" element={components.SignInAuth} />
       </Routes>
     </div>
   );

@@ -12,7 +12,7 @@ export const authenticationService = {
   }
 };
 
-function login(identite, motDePasse) {
+function login(value) {
   // eslint-disable-next-line no-undef
   const url = `${process.env?.REACT_APP_API}/authentification`;
 
@@ -21,7 +21,7 @@ function login(identite, motDePasse) {
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ identite, motDePasse })
+    body: JSON.stringify(value)
   };
 
   return fetch(url, requestOptions)
